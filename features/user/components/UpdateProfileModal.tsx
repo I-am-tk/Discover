@@ -8,6 +8,7 @@ import useFileUpload from "lib/useFileUpload";
 import useUpdateProfile from "lib/useUpdateProfile";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import { useWarnIfUnsavedChanges } from "hooks/useWarnIfUnsavedChanges";
 
 function UpdateProfileModal({ onClose }: { onClose: () => void }) {
   const { profile } = useUser();
@@ -24,6 +25,10 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
   const profileUpdateMutation = useUpdateProfile();
   const fileUploadMutation = useFileUpload();
   const fileRemoveMutation = useFileRemove();
+  useWarnIfUnsavedChanges(
+    profileUpdateMutation.isLoading || fileUploadMutation.isLoading || fileRemoveMutation.isLoading,
+    "Do you want to leave? It is being updated!!"
+  );
 
   const isLoading =
     profileUpdateMutation.isLoading || fileUploadMutation.isLoading || fileRemoveMutation.isLoading;
@@ -115,8 +120,8 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
             </div>
           )}
           <div>
-            <div className="absolute top-2 right-2  z-10">
-              <label>
+            <div className="absolute top-2 right-2 z-10">
+              <label className="block">
                 <input
                   type="file"
                   name="backgroundImage"
@@ -126,7 +131,7 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
                   ref={backgroundImageRef}
                   onChange={onImageFileChangeHandler}
                 />
-                <span className="bg-indigo-50 block rounded-full p-2  border">
+                <span className="bg-indigo-50 w-12 h-12 rounded-full flex items-center justify-center  border">
                   <Icon iconCode="add_a_photo" />
                 </span>
               </label>

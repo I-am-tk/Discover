@@ -100,7 +100,11 @@ export default function LoginForm() {
       </fieldset>
       <hr className="bg-gray-200 h-[1px] my-6" />
       <Link href={"signup"}>
-        <a className=" text-center block text-indigo-700 hover:underline">
+        <a
+          className={`text-center block text-indigo-700 hover:underline ${
+            isLoading ? "pointer-events-none" : ""
+          }`}
+        >
           Don&apos;t have an account? sign up
         </a>
       </Link>

@@ -34,8 +34,7 @@ export const useExplorePosts = (userIds: string[], postsPerPage = 10) => {
   const initialPostQuery = query(
     postsRef,
     where("userId", "not-in", userIds),
-    limit(postsPerPage + 1),
-    orderBy("createdAt", "desc")
+    limit(postsPerPage + 1)
   );
 
   // ! key, initalQuery, doctype, colType, do some extra work,

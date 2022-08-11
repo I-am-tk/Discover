@@ -143,7 +143,13 @@ export default function SignupForm() {
       </fieldset>
       <hr className="bg-gray-200 h-[1px] my-6" />
       <Link href={"/login"}>
-        <a className="text-center block text-indigo-700 hover:underline">Have an account? log in</a>
+        <a
+          className={`text-center block text-indigo-700 hover:underline ${
+            isLoading ? "pointer-events-none" : ""
+          }`}
+        >
+          Have an account? log in
+        </a>
       </Link>
       <fieldset disabled={isLoading} className="mt-4">
         <legend className="sr-only">Other ways to log in</legend>
