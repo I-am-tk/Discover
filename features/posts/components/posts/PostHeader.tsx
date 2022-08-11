@@ -3,7 +3,7 @@ import { useUser } from "features/authentications/contexts/user.context";
 import React from "react";
 import FollowButton from "./FollowButton";
 import MoreActionOnPost from "./MoreActionOnPost";
-
+import config from "config";
 import type { PostType, PostWithCommentsType } from "features/types";
 import Link from "next/link";
 import useToggleFollow from "lib/useToggleFollow";
@@ -18,7 +18,7 @@ function PostHeader({ post }: { post: PostType | PostWithCommentsType }) {
 
   const isPostDetailedPage = router.pathname === "/post/[postId]";
   return (
-    <div className="px-4 py-2 sm:py-3 flex">
+    <div className="px-4 py-2 flex">
       {
         <React.Fragment>
           <div className="grow flex gap-2 items-center flex-start">
@@ -27,20 +27,24 @@ function PostHeader({ post }: { post: PostType | PostWithCommentsType }) {
                 {/* Avatar */}
                 <div className="relative">
                   <Avatar
-                    avatarURL={data ? data.userProfileImage || "/user.png" : ""}
+                    avatarURL={
+                      !isLoading && !isError ? data.userProfileImage || config.defaultUserImage : ""
+                    }
                     className="avatar-sm sm:avatar-md"
                   />
                 </div>
                 {/* Username, will be at max of 12char */}
-                <p className="text-md font-medium min-w-[40px]">{data ? data.username : ""}</p>
+                <p className="text-base font-medium min-w-[40px]">{data ? data.username : ""}</p>
                 {/* Follow or Unfollow */}
               </a>
             </Link>
-            <p className="ml-2">&#183;</p>
             {!isMyPost && (
-              <div className="flex items-center">
-                <FollowButton className="text-sm py-2" postUserId={post.userId} />
-              </div>
+              <>
+                <p className="ml-2">&#183;</p>
+                <div className="flex items-center">
+                  <FollowButton className="text-sm py-2" postUserId={post.userId} />
+                </div>
+              </>
             )}
           </div>
           {(isMyPost || !isPostDetailedPage) && <MoreActionOnPost post={post} />}

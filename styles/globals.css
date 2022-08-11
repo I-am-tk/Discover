@@ -24,11 +24,9 @@
   body::-webkit-scrollbar-thumb {
     @apply bg-gray-500;
   }
-  @font-face {
-    font-family: "Material Symbols Rounded";
-    font-style: normal;
-    font-weight: 100 700;
-    src: url("/fonts/material-icons/rounded-icons.woff2") format("woff2");
+
+  svg {
+    @apply fill-current w-full h-full;
   }
 }
 
@@ -58,7 +56,7 @@
   }
 
   .btn-icon {
-    @apply w-10 h-10  flex justify-center items-center rounded hover:bg-gray-100;
+    @apply w-10 h-10 p-[6px] text-gray-700 flex justify-center items-center rounded hover:bg-gray-100;
   }
 
   .loading-spinner {
@@ -82,28 +80,6 @@
 }
 
 @layer utilities {
-  /**** 
-  ***** MATERIAL ICONS ****
-  ****/
-  .material-symbols-rounded {
-    font-family: "Material Symbols Rounded";
-    font-weight: normal;
-    font-style: normal;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-feature-settings: "liga";
-    -webkit-font-smoothing: antialiased;
-    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-  }
-
-  .material-symbols-rounded.filled {
-    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
-  }
   /**** 
   ***** HIDE SCROLLBAR ****
   ****/

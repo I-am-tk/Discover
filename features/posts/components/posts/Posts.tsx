@@ -54,7 +54,7 @@ function Posts() {
           Refreshing
         </p>
       )}
-      <div className="flex grow mb-6 flex-col gap-8 aspect-square">
+      <div className="flex grow mb-6 flex-col gap-4 sm:gap-6 aspect-square">
         {posts.length === 0 && (
           <div className="bg-indigo-50 relative py-10 sm:aspect-video p-4 rounded xs:border px-4 sm:py-3 flex justify-center items-center">
             <div className="relative z-30 text-center flex flex-col h-36">
@@ -68,7 +68,7 @@ function Posts() {
                   <a className="hover:underline text-indigo-500">Create a post</a>
                 </Link>{" "}
                 and share it with yout friends or{" "}
-                <Link href="/create-post">
+                <Link href="/search">
                   <a className="hover:underline text-indigo-500">explore posts</a>
                 </Link>{" "}
               </p>

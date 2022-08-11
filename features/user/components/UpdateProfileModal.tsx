@@ -1,5 +1,4 @@
 import Avatar from "components/Avatar";
-import Icon from "components/Icon/Icon";
 import Loading from "components/Loading";
 import Modal from "components/Modal";
 import { useUser } from "features/authentications/contexts/user.context";
@@ -9,12 +8,15 @@ import useUpdateProfile from "lib/useUpdateProfile";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { useWarnIfUnsavedChanges } from "hooks/useWarnIfUnsavedChanges";
-
+import AddPhotoIcon from "@material-symbols/svg-400/rounded/add_a_photo.svg";
+import config from "config";
 function UpdateProfileModal({ onClose }: { onClose: () => void }) {
   const { profile } = useUser();
 
   // It will open up a modal
-  const [previewUserImageURL, setPreviewImageURL] = useState(profile.userProfileImage);
+  const [previewUserImageURL, setPreviewImageURL] = useState(
+    profile.userProfileImage || config.defaultUserImage
+  );
   const [previewBackgroundImageURL, setPreviewBackgroundImageURL] = useState(
     profile.backgroundImage
   );
@@ -105,7 +107,7 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
   return (
     <Modal title="Update Profile" closeModal={!isLoading ? onClose : () => {}}>
       <div className="w-full">
-        <div className="relative p-4 md:rounded  aspect-[3] sm:aspect-[5] bg-gradient-to-bl from-indigo-500 to-purple-500">
+        <div className="relative p-4 md:rounded  aspect-[3] bg-gradient-to-bl from-indigo-500 to-purple-500">
           {/* add photo background image */}
           {previewBackgroundImageURL && (
             <div className="absolute inset-0 overflow-hidden rounded">
@@ -132,7 +134,7 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
                   onChange={onImageFileChangeHandler}
                 />
                 <span className="bg-indigo-50 w-12 h-12 rounded-full flex items-center justify-center  border">
-                  <Icon iconCode="add_a_photo" />
+                  <AddPhotoIcon viewBox="0 0 48 48" className="w-8" />
                 </span>
               </label>
             </div>
@@ -162,7 +164,11 @@ function UpdateProfileModal({ onClose }: { onClose: () => void }) {
           <p className="font-medium text-lg">{profile.fullName}</p>
           <p>{profile.username}</p>
           <div className="mt-4">
+            <label htmlFor="bio" className="text-sm text-gray-500 mb-2 block">
+              Bio :
+            </label>
             <textarea
+              id="bio"
               placeholder="Add bio"
               aria-label="bio"
               className="w-full border p-2 rounded"

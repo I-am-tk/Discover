@@ -1,11 +1,10 @@
-import Icon from "components/Icon/Icon";
 import { useUser } from "features/authentications/contexts/user.context";
 import FollowButton from "features/posts/components/posts/FollowButton";
 import { UserProfileType } from "features/types";
 import useProfile from "lib/useProfile";
 import React, { useState } from "react";
 import UpdateProfileModal from "./UpdateProfileModal";
-
+import EditIcon from "@material-symbols/svg-400/rounded/edit.svg";
 function UserInfo({ profile }: { profile: UserProfileType }) {
   const { profile: myProfile } = useUser();
 
@@ -54,7 +53,7 @@ function UserInfo({ profile }: { profile: UserProfileType }) {
                 aria-label="edit"
                 className="btn-icon  bg-white  rounded-full"
               >
-                <Icon iconCode="edit" />
+                <EditIcon viewBox="0 0 48 48" />
               </button>
             )}
           </div>

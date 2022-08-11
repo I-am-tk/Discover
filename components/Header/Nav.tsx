@@ -1,11 +1,18 @@
 import { Menu, Transition } from "@headlessui/react";
-import Icon from "components/Icon/Icon";
 import { useUser } from "features/authentications/contexts/user.context";
 import { logout } from "features/authentications/services";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef } from "react";
-
+import HomeIcon from "@material-symbols/svg-400/rounded/home.svg";
+import FilledHomeIcon from "@material-symbols/svg-400/rounded/home-fill.svg";
+import ExploreIcon from "@material-symbols/svg-400/rounded/explore.svg";
+import FilledExploreIcon from "@material-symbols/svg-400/rounded/explore-fill.svg";
+import AddCircleIcon from "@material-symbols/svg-400/rounded/add_circle.svg";
+import FilledAddCircleIcon from "@material-symbols/svg-400/rounded/add_circle-fill.svg";
+import Person from "@material-symbols/svg-400/rounded/person.svg";
+import Logout from "@material-symbols/svg-400/rounded/logout.svg";
+import FilledPerson from "@material-symbols/svg-400/rounded/person-fill.svg";
 const MobileNav = ({ className = "" }: { className?: string }) => {
   const { profile } = useUser();
   const userId = profile.userId;
@@ -20,6 +27,11 @@ const MobileNav = ({ className = "" }: { className?: string }) => {
     menuBtnRef.current.click();
   };
 
+  const isHomePage = asPath === "/";
+  const isSearchPage = asPath === "/search";
+  const isExplorePage = asPath === "/";
+  const isCreatePostPage = asPath === "/create-post";
+  const isUserPage = asPath.startsWith("/user");
   return (
     <nav
       className={`md:grow-[2] md:basis-0 md:flex md:justify-end sm:relative fixed bottom-0 w-full bg-gray-50 sm:bg-white border-t sm:border-0 sm:w-auto ${className}`}
@@ -27,44 +39,36 @@ const MobileNav = ({ className = "" }: { className?: string }) => {
       <ul className="flex gap-4 sm:gap-2 justify-between px-4 py-2 sm:p-0 max-w-sm mx-auto sm:mx-0">
         <li>
           <Link href={"/"}>
-            <a className={`btn-icon ${asPath === "/" ? "bg-gray-100" : ""}`}>
-              <Icon
-                iconCode={"home"}
-                className={`${asPath === "/" ? "filled text-gray-900" : ""}`}
-              />
+            <a className={`btn-icon ${isHomePage ? "bg-gray-100" : ""}`}>
+              {isHomePage && <FilledHomeIcon viewBox="0 0 48 48" />}
+              {!isHomePage && <HomeIcon viewBox="0 0 48 48" />}
             </a>
           </Link>
         </li>
 
         <li className="block">
           <Link href={"/search"}>
-            <a className={`btn-icon ${asPath === "/search" ? "bg-gray-100" : ""}`}>
-              <Icon
-                iconCode={"explore"}
-                className={`${asPath === "/search" ? "filled text-gray-900" : ""}`}
-              />
+            <a className={`btn-icon ${isSearchPage ? "bg-gray-100" : ""}`}>
+              {!isSearchPage && <ExploreIcon viewBox="0 0 48 48" />}
+              {isSearchPage && <FilledExploreIcon viewBox="0 0 48 48" />}
             </a>
           </Link>
         </li>
 
         <li>
           <Link href={"/create-post"}>
-            <a className={`btn-icon ${asPath === "/create-post" ? "bg-gray-100" : ""}`}>
-              <Icon
-                iconCode={"add_circle"}
-                className={`${asPath === "/create-post" ? "filled text-gray-900" : ""}`}
-              />
+            <a className={`btn-icon ${isCreatePostPage ? "bg-gray-100" : ""}`}>
+              {!isCreatePostPage && <AddCircleIcon viewBox="0 0 48 48" />}
+              {isCreatePostPage && <FilledAddCircleIcon viewBox="0 0 48 48" />}
             </a>
           </Link>
         </li>
 
         <li className="sm:hidden">
           <Link href={`/user/${userId}`}>
-            <a className={`btn-icon ${asPath.startsWith("/user") ? "bg-gray-100" : ""}`}>
-              <Icon
-                iconCode={"person"}
-                className={`${asPath.startsWith("/user") ? "filled text-gray-900" : ""}`}
-              />
+            <a className={`btn-icon ${isUserPage ? "bg-gray-100" : ""}`}>
+              {!isUserPage && <Person viewBox="0 0 48 48" />}
+              {isUserPage && <FilledPerson viewBox="0 0 48 48" />}
             </a>
           </Link>
         </li>
@@ -72,10 +76,8 @@ const MobileNav = ({ className = "" }: { className?: string }) => {
           <Menu as="div" className="relative z-20 inline-block text-left">
             <Menu.Button>
               <button ref={menuBtnRef} type="button" className="btn-icon" aria-label="More Actions">
-                <Icon
-                  iconCode={"person"}
-                  className={`${asPath.startsWith("/user") ? "filled text-gray-900" : ""}`}
-                />
+                {!isUserPage && <Person viewBox="0 0 48 48" />}
+                {isUserPage && <FilledPerson viewBox="0 0 48 48" />}
               </button>
             </Menu.Button>
             <Transition
@@ -115,7 +117,7 @@ const MobileNav = ({ className = "" }: { className?: string }) => {
 
         <li className="sm:hidden">
           <button aria-label="logout " type="button" className="btn-icon" onClick={onLogoutHandler}>
-            <Icon iconCode={"logout"} />
+            <Logout viewBox="0 0 48 48" />
           </button>
         </li>
       </ul>

@@ -1,7 +1,6 @@
-import Icon from "components/Icon/Icon";
 import Image from "next/image";
 import React from "react";
-
+import AddPhoto from "@material-symbols/svg-400/rounded/add_a_photo.svg";
 function ImageInput({
   imgURL,
   fileChangeHandler,
@@ -36,19 +35,17 @@ function ImageInput({
               className="hidden bg-red-200"
               aria-label="choose an image"
               onChange={fileChangeHandler}
+              accept="image/*"
             />
             <span
               className={`flex justify-center items-center  bg-white rounded-full ${
                 !imageExist ? "p-6" : "p-3"
               }`}
             >
-              <span
-                className={`material-symbols-rounded block shrink-0 ${
-                  !imageExist ? "text-[48px]" : "text-[24px]"
-                }`}
-              >
-                add_a_photo
-              </span>
+              <AddPhoto
+                viewBox="0 0 48 48"
+                className={`block shrink-0 ${!imageExist ? "w-[48px]" : "w-[32px]"}`}
+              />
             </span>
           </label>
         </div>

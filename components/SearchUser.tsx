@@ -2,14 +2,16 @@ import useSearchUser from "lib/useSearchUser";
 import Link from "next/link";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Avatar from "./Avatar";
-import Icon from "./Icon/Icon";
 import Loading from "./Loading";
-
+import SearchIcon from "@material-symbols/svg-400/rounded/search.svg";
+import CloseIcon from "@material-symbols/svg-400/rounded/close.svg";
+import config from "config";
 function SearchUser() {
   const [searchText, setSearchText] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
   const searchUser = useSearchUser(searchText);
-  const refetchUsers = useCallback(searchUser.refetch, []);
+  const refetchS = searchUser.refetch;
+  const refetchUsers = useCallback(refetchS, [refetchS]);
   const isFirstRender = useRef(true);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -56,11 +58,11 @@ function SearchUser() {
       <div className="relative group" id="search-user-container">
         <div className="relative peer">
           <span className="sr-only">Search</span>
-          <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-            <Icon iconCode="search" />
+          <span className="btn-icon absolute  hover:bg-transparent focus:bg-transparent inset-y-0 left-0 flex items-center p-2">
+            <SearchIcon viewBox="0 0 48 48" />
           </span>
           <input
-            className="placeholder:italic  placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-14 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+            className="placeholder:italic  placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-11 pr-14 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 text-base"
             placeholder="Search"
             type="text"
             name="search"
@@ -80,11 +82,11 @@ function SearchUser() {
           >
             <button
               type="button"
-              className="btn-icon"
+              className="btn-icon hover:bg-transparent focus:bg-transparent p-2"
               aria-label="clear"
               onClick={() => setSearchText("")}
             >
-              <Icon iconCode="clear" />
+              <CloseIcon viewBox="0 0 48 48" />
             </button>
           </span>
         </div>
@@ -115,7 +117,7 @@ function SearchUser() {
                       >
                         <Avatar
                           className="avatar-md"
-                          avatarURL={user.userProfileImage || "/user.png"}
+                          avatarURL={user.userProfileImage || config.defaultUserImage}
                         />
                         <div>
                           <p className="text-gray-700">{user.fullName}</p>

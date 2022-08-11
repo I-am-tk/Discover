@@ -1,7 +1,7 @@
 import Avatar from "components/Avatar";
 import { useUser } from "features/authentications/contexts/user.context";
 import React from "react";
-
+import config from "config";
 function UserMeta() {
   const { profile } = useUser();
   return (
@@ -12,9 +12,12 @@ function UserMeta() {
           aria-label={""}
           className={`w-10 h-10 flex justify-center items-center rounded  ${""}`}
         >
-          <Avatar className="avatar-sm" avatarURL={profile.userProfileImage || "/user.png"} />
+          <Avatar
+            className="avatar-sm"
+            avatarURL={profile.userProfileImage || config.defaultUserImage}
+          />
         </button>
-        <p className="text-md">{profile?.username}</p>
+        <p className="text-base font-medium min-w-[40px]">{profile?.username}</p>
       </div>
     </div>
   );

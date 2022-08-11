@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import Icon from "components/Icon/Icon";
 import Link from "next/link";
 import { PostType, PostWithCommentsType } from "features/types";
 import { useUser } from "features/authentications/contexts/user.context";
@@ -8,7 +7,7 @@ import useDeletePost from "lib/useDeletePost";
 import Modal from "components/Modal";
 import Loading from "components/Loading";
 import { useRouter } from "next/router";
-
+import MoreHorizIcon from "@material-symbols/svg-400/rounded/more_horiz.svg";
 function MoreActionOnPost({ post }: { post: PostType | PostWithCommentsType }) {
   const { profile } = useUser();
   const isFollowing = profile.following.includes(post.userId);
@@ -41,7 +40,7 @@ function MoreActionOnPost({ post }: { post: PostType | PostWithCommentsType }) {
       <Menu as="div" className="relative z-20 inline-block text-left">
         <Menu.Button>
           <button type="button" className="btn-icon" aria-label="More Actions">
-            <Icon iconCode="more_horiz" />
+            <MoreHorizIcon viewBox="0 0 48 48" />
           </button>
         </Menu.Button>
         <Transition

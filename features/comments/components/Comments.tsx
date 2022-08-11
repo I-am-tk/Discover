@@ -1,17 +1,6 @@
+import { highlightHastag } from "components/utils/formatHastag";
 import { CommentType } from "features/types";
 import React, { useState } from "react";
-
-export const highlightHastag = (text: string) => {
-  return text
-    .split(" ")
-    .map((word) =>
-      word.startsWith("#") || word.startsWith("@") ? (
-        <span className="text-blue-500">{word} </span>
-      ) : (
-        `${word} `
-      )
-    );
-};
 
 function Comments({ comments }: { comments: CommentType[] }) {
   // get all the comments for the post don't need to listen

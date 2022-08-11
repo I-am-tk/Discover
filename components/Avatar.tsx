@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-
+import AccountCircleIcon from "@material-symbols/svg-400/rounded/account_circle.svg";
 function Avatar({ avatarURL, className }: { avatarURL: string; className?: string }) {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 

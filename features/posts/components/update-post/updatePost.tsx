@@ -1,4 +1,3 @@
-import Icon from "components/Icon/Icon";
 import Loading from "components/Loading";
 import Modal from "components/Modal";
 import ProgressBar from "components/ProgressBar";
@@ -12,7 +11,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import UpdatePostForm from "./updatePostForm";
 import UserMeta from "./UserMeta";
-
+import CheckCircleIcon from "@material-symbols/svg-400/rounded/check_circle.svg";
 function UpdatePost({ post }: { post: PostWithCommentsType | PostType }) {
   const { profile } = useUser();
   const userId = profile.userId;
@@ -85,7 +84,7 @@ function UpdatePost({ post }: { post: PostWithCommentsType | PostType }) {
             )}
             {isSuccess && (
               <div className="flex justify-center py-2">
-                <Icon iconCode="check_circle" className="text-[48px] text-green-500" />
+                <CheckCircleIcon viewBox="0 0 48 48" className="w-[64px] text-green-500" />
               </div>
             )}
           </div>

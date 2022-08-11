@@ -71,12 +71,12 @@ function CreatePostForm({
         />
       </div>
 
-      <div className="px-4 mt-6 grow sm:mt-0 col-start-2">
-        <div className="hidden sm:block mb-4 py-2">
+      <div className="mt-6 grow sm:mt-0 col-start-2">
+        <div className="hidden sm:block mb-4 sm:border-b px-2">
           <UserMeta />
         </div>
         {/* caption */}
-        <div className="">
+        <div className="px-4">
           <TextArea
             aria-label="add caption"
             placeholder={"Add caption"}
@@ -86,9 +86,11 @@ function CreatePostForm({
           />
           {captionError && <p className="text-red-500 text-sm py-1">{captionError}</p>}
         </div>
-        <button type="submit" className="w-full mt-8 btn btn-primary">
-          Create
-        </button>
+        <div className="px-4">
+          <button type="submit" className="w-full mt-8 btn btn-primary">
+            Create
+          </button>
+        </div>
       </div>
     </form>
   );

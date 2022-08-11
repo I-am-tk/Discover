@@ -1,5 +1,6 @@
 import Avatar from "components/Avatar";
 import Loading from "components/Loading";
+import config from "config";
 import { useUser } from "features/authentications/contexts/user.context";
 import { UserProfileType } from "features/types";
 import useToggleFollow from "lib/useToggleFollow";
@@ -20,16 +21,16 @@ const UserListItem = ({ userProfile }: { userProfile: UserProfileType }) => {
     >
       <div className="flex relative grow items-center gap-4  sm:gap-6">
         <Avatar
-          avatarURL={userProfile.userProfileImage || "/user.png"}
+          avatarURL={userProfile.userProfileImage || config.defaultUserImage}
           className="avatar-md sm:avatar-lg shrink-0"
         />
         {/* username should not be more than 12char */}
         <Link href={`/user/${userProfile.userId}`}>
           <a className="group w-full block">
-            <p className="text-base sm:text-lg min-w-24 overflow-hidden hover:underline group-hover:underline">
+            <p className="text-sm xs:text-base sm:text-lg min-w-24 overflow-hidden hover:underline group-hover:underline">
               {userProfile.fullName}
             </p>
-            <p className="text-sm sm:text-base text-gray-400">{userProfile.username}</p>
+            <p className="text-xs xs:text-sm sm:text-base text-gray-400">{userProfile.username}</p>
           </a>
         </Link>
       </div>

@@ -1,4 +1,3 @@
-import Icon from "components/Icon/Icon";
 import Comments from "features/comments/components/Comments";
 import AddComment from "features/comments/components/AddComment";
 import { useUser } from "features/authentications/contexts/user.context";
@@ -9,10 +8,16 @@ import { PostType, PostWithCommentsType } from "features/types";
 import PostHeader from "./PostHeader";
 import PostImage from "./PostImage";
 import useProfile from "lib/useProfile";
-
+import ChatBubbleIcon from "@material-symbols/svg-400/rounded/chat_bubble.svg";
+import { useRef } from "react";
 // whenever I store image I will make sure, I will store its size as well
 function SinglePost({ post }: { post: PostWithCommentsType | PostType }) {
   const { isLoading, isError, data } = useProfile(post.userId);
+
+  const ref = useRef<{ focusAddComment: () => void }>(null!);
+  const onClickCommentButtonHandler = () => {
+    if (ref.current) ref.current.focusAddComment();
+  };
   return (
     <div className={`xs:border bg-white pb-8 md:pb-0 rounded md:grid single-post-grid`}>
       {/* header */}
@@ -29,8 +34,13 @@ function SinglePost({ post }: { post: PostWithCommentsType | PostType }) {
         <div className="flex p-2">
           <div className="flex grow">
             <LikeButton post={post} />
-            <button type="button" className="btn-icon" aria-label="comment">
-              <Icon iconCode="chat_bubble" />
+            <button
+              type="button"
+              onClick={onClickCommentButtonHandler}
+              className="btn-icon"
+              aria-label="comment"
+            >
+              <ChatBubbleIcon viewBox="0 0 48 48" />
             </button>
           </div>
           <SaveButton post={post} />
@@ -61,7 +71,7 @@ function SinglePost({ post }: { post: PostWithCommentsType | PostType }) {
         </div>
       </div>
       <div className="col-start-2 md:py-2 md:pb-4">
-        <AddComment postId={post.id} />
+        <AddComment postId={post.id} ref={ref} />
       </div>
     </div>
   );

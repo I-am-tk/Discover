@@ -1,4 +1,3 @@
-import Icon from "components/Icon/Icon";
 import Loading from "components/Loading";
 import Modal from "components/Modal";
 import ProgressBar from "components/ProgressBar";
@@ -9,7 +8,7 @@ import useUpdatePostCount from "lib/useUpdatePostCount";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import CreatePostForm from "./CreatePostForm";
-
+import CheckCircleIcon from "@material-symbols/svg-400/rounded/check_circle.svg";
 function CreatePost() {
   const { profile } = useUser();
   const userId = profile.userId;
@@ -64,13 +63,13 @@ function CreatePost() {
     return <p className="px-4 bg-indigo-100 mt-2 py-3 flex gap-2">Something went wrong</p>;
 
   return (
-    <div className=" xs:pt-4  sm:pt-8  xs:px-4">
-      <div className="max-w-md sm:max-w-none mx-auto">
+    <div className=" xs:pt-4  sm:pt-8  xs:px-4 ">
+      <div className="max-w-md sm:max-w-none mx-auto bg-white">
         {/* header */}
         <CreatePostForm createPostHandler={createPostHandler} loading={isLoading} />
       </div>
       {/*  */}
-      {/*  */}
+      {/*isLoading || isSuccess  */}
       {(isLoading || isSuccess) && (
         <Modal title="Creating Post" closeModal={() => {}}>
           <div className="py-2">
@@ -89,10 +88,7 @@ function CreatePost() {
             )}
             {isSuccess && (
               <div className="flex justify-center pt-4 pb-8">
-                <Icon
-                  iconCode="check_circle"
-                  className="text-[48px] md:text-[64px] text-green-500"
-                />
+                <CheckCircleIcon viewBox="0 0 48 48" className="w-[64px] text-green-500" />
               </div>
             )}
           </div>

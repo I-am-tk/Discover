@@ -1,5 +1,4 @@
 import Avatar from "components/Avatar";
-import Icon from "components/Icon/Icon";
 import Loading from "components/Loading";
 import { useUser } from "features/authentications/contexts/user.context";
 import PostImageGallery from "features/posts/components/post-grid/PostImageGallery";
@@ -12,6 +11,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import GridOnIcon from "@material-symbols/svg-400/rounded/grid_on.svg";
+import Bookmark from "@material-symbols/svg-400/rounded/bookmark.svg";
+import FilledGridOnIcon from "@material-symbols/svg-400/rounded/grid_on-fill.svg";
+import FilledBookmark from "@material-symbols/svg-400/rounded/bookmark-fill.svg";
+import config from "config";
 
 function User() {
   const router = useRouter();
@@ -53,7 +57,7 @@ function User() {
             <div className="absolute inset-0 bg-gradient-to-bl from-indigo-500 to-purple-500"></div>
           )}
           <div className="w-16 shrink-0 rounded-full absolute -bottom-7 border-2 border-white">
-            <Avatar avatarURL={profile.userProfileImage || "/user.png"} />
+            <Avatar avatarURL={profile.userProfileImage || config.defaultUserImage} />
           </div>
         </div>
         <UserInfo profile={profile} />
@@ -64,7 +68,8 @@ function User() {
                 !saved ? "bg-gray-200" : ""
               }`}
             >
-              <Icon iconCode="grid_on" className={`${!saved ? "filled" : ""}`} />
+              {!saved && <GridOnIcon viewBox="0 0 48 48" className={`w-6 `} />}
+              {saved && <FilledGridOnIcon viewBox="0 0 48 48" className={`w-6`} />}
               <p>posts</p>
             </a>
           </Link>
@@ -75,7 +80,8 @@ function User() {
                   saved ? "bg-gray-200" : ""
                 }`}
               >
-                <Icon iconCode="bookmark" className={`${saved ? "filled" : ""}`} />
+                {!saved && <Bookmark viewBox="0 0 48 48" className="w-6" />}
+                {saved && <FilledBookmark viewBox="0 0 48 48" className="w-6" />}
                 <p>saved</p>
               </a>
             </Link>

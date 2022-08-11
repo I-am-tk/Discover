@@ -5,6 +5,7 @@ import { UserProfileType } from "features/types";
 import useSuggestion from "lib/useSuggestion";
 import useToggleFollow from "lib/useToggleFollow";
 import Link from "next/link";
+import config from "config";
 import React from "react";
 
 const UserSuggestionProfile = ({ userProfile }: { userProfile: UserProfileType }) => {
@@ -21,7 +22,10 @@ const UserSuggestionProfile = ({ userProfile }: { userProfile: UserProfileType }
       className="flex items-center gap-2 border-b border-b-gray-100 last:border-0  pb-2"
     >
       <div className="flex relative grow items-center gap-3">
-        <Avatar avatarURL={userProfile.userProfileImage || "/user.png"} className="avatar-sm" />
+        <Avatar
+          avatarURL={userProfile.userProfileImage || config.defaultUserImage}
+          className="avatar-sm"
+        />
         {/* username should not be more than 12char */}
         <Link href={`/user/${userProfile.userId}`}>
           <a className="group">
