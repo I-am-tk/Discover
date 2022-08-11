@@ -54,10 +54,15 @@ function Posts() {
           Refreshing
         </p>
       )}
-      <div className="flex grow mb-6 flex-col gap-4 sm:gap-6 aspect-square">
-        {posts.length === 0 && (
-          <div className="bg-indigo-50 relative py-10 sm:aspect-video p-4 rounded xs:border px-4 sm:py-3 flex justify-center items-center">
-            <div className="relative z-30 text-center flex flex-col h-36">
+      {posts.map((post) => (
+        <div key={post.id} className="flex grow mb-6 flex-col gap-4 sm:gap-6 aspect-square">
+          <Post post={post} />
+        </div>
+      ))}
+      {posts.length === 0 && (
+        <div className="flex grow mb-6 flex-col gap-4 sm:gap-6">
+          <div className="bg-indigo-50  py-10  p-4 rounded xs:border px-4 sm:py-3 flex justify-center items-center m-auto sm:m-0 min-h-[250px]">
+            <div className="text-center flex flex-col">
               <p className="mb-1 text-base text-gray-600">Welcome</p>
               <p className="text-2xl sm:text-3xl font-semibold">{profile.fullName} 👋</p>
               <div className="flex flex-col justify-center items-center my-3">
@@ -65,20 +70,17 @@ function Posts() {
               </div>
               <p className="text-sm mt-auto pt-4">
                 <Link href="/create-post">
-                  <a className="hover:underline text-indigo-500">Create a post</a>
+                  <a className="hover:underline text-indigo-500 font-semibold">Create a post</a>
                 </Link>{" "}
                 and share it with yout friends or{" "}
                 <Link href="/search">
-                  <a className="hover:underline text-indigo-500">explore posts</a>
+                  <a className="hover:underline text-indigo-500 font-semibold">explore posts</a>
                 </Link>{" "}
               </p>
             </div>
           </div>
-        )}
-        {posts.map((post) => (
-          <Post key={post.id} post={post} />
-        ))}
-      </div>
+        </div>
+      )}
       <div ref={ref}></div>
       {isFetchingNextPage && (
         <p className="px-4 py-3 bg-indigo-50 rounded mb-24 flex items-center gap-2">
