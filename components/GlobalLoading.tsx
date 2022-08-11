@@ -13,6 +13,7 @@ function GlobalLoading() {
               alt=""
               objectFit="contain"
               src={"/logo.png"}
+              priority
             />
           </div>
           <p className="text-2xl sm:text-4xl font-semibold text-gray-700">Discover</p>
